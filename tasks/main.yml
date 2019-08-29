@@ -1,0 +1,28 @@
+---
+- name: Install tlp and related components (Arch Linux)...
+  become: yes
+  pacman: name={{ item }} state=latest
+  with_items:
+    - tlp
+    - tp_smapi
+  when: ansible_os_family == 'Arch Linux' or ansible_os_family == 'Archlinux'
+  tags:
+    - tlp
+
+- name: Install tlp and related components (Debian)...
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - tlp
+    - tp-smapi-dkms
+  when: ansible_os_family == 'Debian'
+  tags:
+    - tlp
+
+- name: Ensure that TLP is enabled and started...
+  become: yes
+  systemd: enabled=yes name={{ item }}
+  with_items:
+    - tlp.service
+  tags:
+    - tlp
