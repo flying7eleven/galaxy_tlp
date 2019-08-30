@@ -1,13 +1,16 @@
 ---
 - name: Install tlp and related components (Arch Linux)...
   become: yes
-  pacman: name={{ item }} state=latest
-  with_items:
-    - acpi_call
-    - ethtool
-    - smartmontools
-    - tlp
-    - tp_smapi
+  pacman:
+    name: [
+            'acpi_call',
+            'ethtool',
+            'smartmontools',
+            'tlp',
+            'tp_smapi',
+          ]
+    state: latest
+    update_cache: yes
   when: ansible_os_family == 'Arch Linux' or ansible_os_family == 'Archlinux'
   tags:
     - tlp
