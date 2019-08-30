@@ -17,10 +17,12 @@
 
 - name: Install tlp and related components (Debian)...
   become: yes
-  apt: name={{ item }} state=latest
-  with_items:
-    - tlp
-    - tp-smapi-dkms
+  apt:
+    name: [
+            'tlp',
+            'tp-smapi-dkms',
+          ]
+    state: latest
   when: ansible_os_family == 'Debian'
   tags:
     - tlp
