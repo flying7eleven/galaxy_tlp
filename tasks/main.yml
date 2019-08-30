@@ -3,6 +3,9 @@
   become: yes
   pacman: name={{ item }} state=latest
   with_items:
+    - acpi_call
+    - ethtool
+    - smartmontools
     - tlp
     - tp_smapi
   when: ansible_os_family == 'Arch Linux' or ansible_os_family == 'Archlinux'
